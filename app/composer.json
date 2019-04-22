@@ -1,0 +1,6 @@
+{
+    "require": {
+        "slim/slim": "^3.0",
+        "guzzlehttp/psr7": "^1.3.1"
+    }
+}
