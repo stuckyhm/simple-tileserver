@@ -1,0 +1,9 @@
+version: '3'
+  
+services:
+  tileserver:
+    image: stucky/simple-tileserver:latest
+    volumes:
+      - ./tiles:/var/www/html/tiles
+    ports:
+      - 8075:80
