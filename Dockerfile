@@ -1,13 +1,10 @@
+ARG BASE_TAG=7.3-apache
+
 FROM composer:1.8
 ADD app /app
 RUN cd /app && rm -rf vendor && composer install
 
-ARG BASE_TAG=7.3-apache
-
-#FROM php:${BASE_TAG}
-FROM stucky/php7-apache-pdo:latest
-
-MAINTAINER Sebastian Stuckenbrock sstuckenbrock@efhm.de
+FROM php:${BASE_TAG}
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
@@ -27,7 +24,5 @@ RUN a2enmod rewrite
 RUN sed -i 's|DocumentRoot /var/www/html| DocumentRoot /var/www/html/web|g' /etc/apache2/sites-available/000-default.conf
 
 COPY --from=0 /app /var/www/html
-
-RUN chmod -R a+rw /var/www/html/cache
 
 EXPOSE 80
